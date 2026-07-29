@@ -1,8 +1,0 @@
-[
-{
-  "directory": "C:/Code/SnakeGame/build",
-  "command": "C:\\msys64\\mingw64\\bin\\g++.exe  @CMakeFiles\\SnakeGame.dir\\includes_CXX.rsp -g -o CMakeFiles\\SnakeGame.dir\\main.cpp.obj -c C:\\Code\\SnakeGame\\main.cpp",
-  "file": "C:/Code/SnakeGame/main.cpp",
-  "output": "CMakeFiles/SnakeGame.dir/main.cpp.obj"
-}
-]
