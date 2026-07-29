@@ -2,6 +2,10 @@
 
 #include <deque>
 
+// #include "GameMap.hpp"
+
+class GameMap;
+
 enum class Direction {
   UP,
   LEFT,
@@ -9,25 +13,21 @@ enum class Direction {
   RIGHT
 };
 
-int dirs[4][2] = {
-  {0, 1}, {0, -1}, {0, -1}, {1, 0}
-};
-
 struct Position{
   int x;
   int y;
-  Position() = default;
+  Position(int _x, int _y);
+  bool operator==(const Position& o) const { return x == o.x && y == o.y; }
 };
 
 class Snake {
 private:
-  int lastDirIdx;
+  Direction lastDirIdx;
   std::deque<Position> SnakeBody;
 public: 
-  Snake() = default;
   Snake();
-  void move(Direction dir);
-  void grow();
-  bool chkAlive();
-  bool isSnake();
+  void move(Direction dir, GameMap& map);
+  void grow(GameMap& map);
+  bool chkAlive(GameMap& map);
+  bool isSnake(Position pos);
 };
