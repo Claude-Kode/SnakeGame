@@ -10,7 +10,8 @@ enum class Direction {
   UP,
   LEFT,
   DOWN,
-  RIGHT
+  RIGHT, 
+  NONE
 };
 
 struct Position{
@@ -30,4 +31,5 @@ public:
   void grow(GameMap& map);
   bool chkAlive(GameMap& map);
   bool isSnake(Position pos);
+  Direction getLastDirection();
 };

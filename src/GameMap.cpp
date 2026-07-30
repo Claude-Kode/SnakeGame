@@ -14,6 +14,7 @@ int rand_int(int l, int r) {
 }
 
 GameMap::GameMap(Snake& snake): height(20), width(30) {
+  map.assign(height + 1, std::vector<bool> (width + 1, false));
   for (int i = 1; i < 6; i++) {
     GameMap::spawnFood(snake);
   }
