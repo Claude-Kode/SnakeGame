@@ -27,9 +27,10 @@ private:
   std::deque<Position> SnakeBody;
 public: 
   Snake();
-  void move(Direction dir, GameMap& map);
+  bool move(Direction dir, GameMap& map);
   void grow(GameMap& map);
   bool chkAlive(GameMap& map);
   bool isSnake(Position pos);
+  std::deque<Position>& getBody();
   Direction getLastDirection();
 };

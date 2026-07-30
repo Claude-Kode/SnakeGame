@@ -13,8 +13,8 @@ int rand_int(int l, int r) {
   return std::uniform_int_distribution<int>(l, r)(rng);
 }
 
-GameMap::GameMap(Snake& snake): height(20), width(30) {
-  map.assign(height + 1, std::vector<bool> (width + 1, false));
+GameMap::GameMap(Snake& snake): height(20), width(50) {
+  map.assign(height + 10, std::vector<int> (width + 10, 0));
   for (int i = 1; i < 6; i++) {
     GameMap::spawnFood(snake);
   }
@@ -22,7 +22,8 @@ GameMap::GameMap(Snake& snake): height(20), width(30) {
 
 bool GameMap::hasFood(Position pos) {
   auto [x, y] = pos;
-  return GameMap::map[x][y];
+  // 是这里导致食物莫名其妙增加吗
+  return GameMap::map[x][y] == 1;
 }
 
 void GameMap::spawnFood(Snake& snake) {
@@ -36,4 +37,13 @@ void GameMap::spawnFood(Snake& snake) {
 
 std::pair<int, int> GameMap::getBound() {
   return {height, width};
+}
+
+std::vector<std::vector<int>> GameMap::getMap() {
+  return GameMap::map;
+}
+
+void GameMap::eraseFood(Position pos) {
+  auto[x, y] = pos;
+  GameMap::map[x][y] = 0;
 }

@@ -27,17 +27,20 @@ void Snake::grow(GameMap& map) {
 }
 
 // 我要是想 move 的时候直接自动判断然后触发 GameMap 的 spawn food 怎么做啊
-void Snake::move(Direction dir, GameMap& map) {
-  if (dir == Direction::NONE) dir = Snake::lastDirIdx;
+bool Snake::move(Direction dir, GameMap& map) {
+  if (dir == Direction::NONE or ((int)dir + (int)Snake::lastDirIdx) % 2 == 0) dir = Snake::lastDirIdx;
   auto [x, y] = *Snake::SnakeBody.begin();
   auto [dx, dy] = dirs[static_cast<int>(dir)];
   Position next = Position(x + dx, y + dy);
-  if (map.hasFood(next)) {
+  bool eat = map.hasFood(next);
+  if (eat) {
     Snake::grow(map);
+    map.eraseFood(next);
   }
   Snake::SnakeBody.push_front(next);
   Snake::SnakeBody.pop_back();
   Snake::lastDirIdx = dir;
+  return eat;
 }
 
 bool Snake::chkAlive(GameMap& map) {
@@ -59,3 +62,6 @@ Direction Snake::getLastDirection() {
   return Snake::lastDirIdx;
 }
 
+std::deque<Position>& Snake::getBody() {
+  return Snake::SnakeBody;
+}
